@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Samad Zaheer — Data Scientist & Data Analyst based in Brisbane, Australia. Masters graduate from QUT specialising in machine learning, SQL, and data visualisation." />
+  <title>Samad Zaheer | Data Scientist & Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:          #0a192f;
+      --navy-light:    #112240;
+      --accent:        #0d9488;
+      --accent-bright: #64ffda;
+      --white:         #ffffff;
+      --off-white:     #f8fafc;
+      --alt-section:   #f0f4f8;
+      --text-primary:  #0d1b2a;
+      --text-secondary:#4a5568;
+      --text-muted:    #8892b0;
+      --text-hero:     #ccd6f6;
+      --border:        #e2e8f0;
+      --shadow-sm:     0 2px 12px rgba(0,0,0,.07);
+      --shadow-md:     0 8px 30px rgba(0,0,0,.10);
+      --shadow-lg:     0 16px 48px rgba(0,0,0,.14);
+      --radius:        8px;
+      --transition:    .22s ease;
+      --max-w:         1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      background: var(--white);
+    }
+
+    a { text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-bright); border-radius: 3px; }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+      background: rgba(10,25,47,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(100,255,218,.08);
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.25); }
+
+    .nav-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent-bright);
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: .03em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      padding: 7px 13px;
+      border-radius: var(--radius);
+      transition: color var(--transition), background var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent-bright); background: rgba(100,255,218,.07); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile dropdown */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: rgba(10,25,47,.98);
+      border-top: 1px solid rgba(100,255,218,.08);
+      padding: 12px 40px 24px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      color: var(--text-muted);
+      font-size: .9rem;
+      font-weight: 500;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      transition: color var(--transition);
+    }
+    .mobile-nav a:hover { color: var(--accent-bright); }
+
+    /* ===== HERO ===== */
+    #hero {
+      background: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 130px 40px 80px;
+    }
+
+    .hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-greeting {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent-bright);
+      font-size: .95rem;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .15s;
+    }
+
+    .hero-name {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      font-weight: 800;
+      color: #e6f1ff;
+      line-height: 1.08;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .3s;
+    }
+
+    .hero-title {
+      font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-muted);
+      line-height: 1.2;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .45s;
+    }
+
+    .hero-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: .875rem;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .55s;
+    }
+    .hero-location svg { color: var(--accent-bright); flex-shrink: 0; }
+
+    .hero-intro {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 44px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .65s;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .8s;
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-bright);
+      border: 1.5px solid var(--accent-bright);
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      font-size: .875rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-outline:hover {
+      background: rgba(100,255,218,.09);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(100,255,218,.12);
+    }
+
+    .social-row { display: flex; gap: 10px; }
+
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(100,255,218,.25);
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      transition: color var(--transition), border-color var(--transition), transform var(--transition), background var(--transition);
+    }
+    .icon-btn:hover {
+      color: var(--accent-bright);
+      border-color: var(--accent-bright);
+      background: rgba(100,255,218,.07);
+      transform: translateY(-2px);
+    }
+
+    /* ===== SECTION COMMONS ===== */
+    section { padding: 100px 0; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .alt-bg { background: var(--alt-section); }
+
+    .section-title {
+      font-size: clamp(1.55rem, 3vw, 2.15rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      position: relative;
+      display: inline-block;
+      padding-bottom: 14px;
+      margin-bottom: 52px;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 52px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Scroll-fade animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: .975rem;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .about-card h4 {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .about-card p {
+      font-size: .85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ===== EXPERIENCE ===== */
+    #experience { background: var(--alt-section); }
+
+    .timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10px; bottom: 10px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), rgba(13,148,136,.1));
+    }
+
+    .tl-item { position: relative; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -34px; top: 9px;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 3px solid var(--alt-section);
+    }
+
+    .exp-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .exp-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .exp-company {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .exp-badge {
+      font-family: 'Fira Code', monospace;
+      font-size: .74rem;
+      color: var(--accent);
+      background: rgba(13,148,136,.08);
+      border: 1px solid rgba(13,148,136,.25);
+      padding: 4px 11px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .exp-role {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .exp-bullets { display: flex; flex-direction: column; gap: 9px; }
+    .exp-bullets li {
+      font-size: .875rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 18px;
+      position: relative;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0; top: 1px;
+      color: var(--accent);
+      font-size: .7rem;
+    }
+
+    /* ===== EDUCATION ===== */
+    #education { background: var(--white); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .edu-card {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .edu-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+
+    .edu-degree {
+      font-size: .975rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .edu-uni {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .edu-meta {
+      font-size: .82rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .edu-year {
+      font-family: 'Fira Code', monospace;
+      font-size: .78rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== PROJECTS ===== */
+    #projects { background: var(--alt-section); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .project-card {
+      background: var(--navy);
+      border: 1px solid rgba(100,255,218,.08);
+      border-left: 3px solid var(--accent-bright);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .project-card:hover {
+      box-shadow: 0 20px 48px rgba(0,0,0,.35);
+      transform: translateY(-4px);
+    }
+
+    .pc-header {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    .pc-gh {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--accent-bright);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      transition: opacity var(--transition);
+    }
+    .pc-gh:hover { opacity: .7; }
+
+    .pc-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent-bright);
+      line-height: 1.35;
+    }
+
+    .pc-desc {
+      font-size: .855rem;
+      color: #a8b2d8;
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    .pc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .tag {
+      font-family: 'Fira Code', monospace;
+      font-size: .7rem;
+      color: var(--accent-bright);
+      background: transparent;
+      border: 1px solid var(--accent-bright);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .projects-footer {
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .view-all-link {
+      color: var(--accent);
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      text-decoration: none;
+      transition: text-decoration-color var(--transition), opacity var(--transition);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-underline-offset: 4px;
+    }
+    .view-all-link:hover {
+      text-decoration-color: var(--accent);
+    }
+
+    /* ===== SKILLS ===== */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-group:first-child { border-top: 1px solid var(--border); }
+
+    .skill-group h3 {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      width: 130px;
+      flex-shrink: 0;
+      padding-top: 5px;
+      margin: 0;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .skill-pill {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--navy);
+      background: rgba(100,255,218,.1);
+      border: 1px solid var(--accent-bright);
+      padding: 5px 14px;
+      border-radius: 6px;
+      cursor: default;
+    }
+
+    /* ===== CERTIFICATIONS ===== */
+    #certifications { background: var(--alt-section); }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 18px;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .cert-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+    .cert-icon-wrap {
+      width: 40px; height: 40px;
+      background: rgba(13,148,136,.08);
+      border: 1px solid rgba(13,148,136,.25);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .cert-issuer {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .cert-meta {
+      font-family: 'Fira Code', monospace;
+      font-size: .72rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      background: var(--navy);
+      padding: 110px 40px;
+    }
+
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-title {
+      color: #e6f1ff;
+      display: block;
+    }
+    .contact-inner .section-title::after {
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-bright);
+    }
+
+    .contact-intro {
+      color: var(--text-muted);
+      font-size: .975rem;
+      line-height: 1.85;
+      margin-bottom: 48px;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-hero);
+      font-size: .875rem;
+      font-weight: 500;
+      padding: 13px 24px;
+      border: 1px solid rgba(100,255,218,.18);
+      border-radius: var(--radius);
+      transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+    }
+    .contact-link svg { color: var(--accent-bright); }
+    .contact-link:hover {
+      color: var(--accent-bright);
+      border-color: var(--accent-bright);
+      background: rgba(100,255,218,.05);
+      transform: translateY(-2px);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #060d19;
+      padding: 26px 40px;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'Fira Code', monospace;
+      font-size: .75rem;
+      color: #3d4f66;
+    }
+    footer span { color: var(--accent-bright); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .about-grid { grid-template-columns: 1fr; gap: 44px; }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-wrap { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { padding: 12px 20px 20px; }
+
+      section { padding: 75px 0; }
+      #hero { padding: 110px 20px 60px; }
+      #contact { padding: 80px 20px; }
+      .container { padding: 0 20px; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+      .about-cards { grid-template-columns: 1fr; }
+
+      .timeline { padding-left: 0; }
+      .timeline::before { display: none; }
+      .tl-item::before { display: none; }
+
+      .hero-cta { flex-direction: column; align-items: flex-start; }
+      .contact-links { flex-direction: column; align-items: stretch; }
+    }
+
+    @media (max-width: 480px) {
+      .exp-header { flex-direction: column; }
+      .certs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-wrap">
+    <a href="#hero" class="nav-logo">&lt;SZ /&gt;</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#about"          onclick="closeMob()">About</a>
+    <a href="#experience"     onclick="closeMob()">Experience</a>
+    <a href="#education"      onclick="closeMob()">Education</a>
+    <a href="#projects"       onclick="closeMob()">Projects</a>
+    <a href="#skills"         onclick="closeMob()">Skills</a>
+    <a href="#certifications" onclick="closeMob()">Certifications</a>
+    <a href="#contact"        onclick="closeMob()">Contact</a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-greeting">Hi, I'm</p>
+    <h1 class="hero-name">Samad Zaheer</h1>
+    <h2 class="hero-title">Data Scientist &amp; Data Analyst</h2>
+
+    <div class="hero-location">
+      <!-- map-pin icon -->
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Brisbane, QLD, Australia
+    </div>
+
+    <p class="hero-intro">
+      Masters graduate in IT (Data Science) from QUT, Australia, with a background in business analysis and application development. Passionate about turning complex data into clear decisions. Seeking Data Analyst and Data Science roles in Australia.
+    </p>
+
+    <div class="hero-cta">
+      <a href="./Samad_Zaheer_Resume.pdf" class="btn-outline" download>
+        <!-- download icon -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
+      </a>
+      <div class="social-row">
+        <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/samadzaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="mailto:samadzaheer258@gmail.com" class="icon-btn" aria-label="Email">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section id="about">
+  <div class="container">
+    <h2 class="section-title fade-in">About Me</h2>
+
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>I'm a data professional based in Brisbane, Australia, with a Master of Information Technology (Data Science) from Queensland University of Technology. My work sits at the intersection of analytics and machine learning — I'm equally comfortable writing complex SQL to clean and transform a dataset as I am building a neural network to classify it.</p>
+        <p>Before my postgraduate studies, I worked as a Business Analyst at Zenatix by Schneider Electric and as an Application Development Associate at Accenture, building data reporting systems and analytics dashboards for enterprise clients across energy management and enterprise software. That commercial experience shapes how I think about problems: with a focus on clarity, business relevance, and reproducible results.</p>
+        <p>I'm currently seeking Data Analyst and Data Science roles in Australia where I can apply my technical skills to meaningful problems and continue growing as a practitioner.</p>
+      </div>
+
+      <div class="about-cards fade-in">
+        <div class="about-card">
+          <h4>Education</h4>
+          <p>Master of IT (Data Science)<br>QUT Brisbane — 2025</p>
+        </div>
+        <div class="about-card">
+          <h4>Experience</h4>
+          <p>2+ years across business analytics &amp; enterprise software development</p>
+        </div>
+        <div class="about-card">
+          <h4>Location</h4>
+          <p>Brisbane, QLD — open to roles across Australia</p>
+        </div>
+        <div class="about-card">
+          <h4>Specialisation</h4>
+          <p>ML modelling, SQL analytics, data visualisation &amp; business insights</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EXPERIENCE
+============================================================ -->
+<section id="experience" class="alt-bg">
+  <div class="container">
+    <h2 class="section-title fade-in">Work Experience</h2>
+
+    <div class="timeline">
+
+      <div class="tl-item fade-in">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Zenatix by Schneider Electric</div>
+              <div class="exp-role">Business Analyst &nbsp;·&nbsp; India</div>
+            </div>
+            <span class="exp-badge">Nov 2022 – Jan 2024</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed interactive dashboards and automated reports summarising large-scale IoT and operational data, enabling clients to make data-driven decisions on energy savings, food compliance and customer comfort.</li>
+            <li>Conducted data analysis to quantify business value and built business cases presented to stakeholders, translating complex datasets into actionable insights.</li>
+            <li>Defined and tested new KPIs and metrics in collaboration with cross-functional teams to improve operational visibility and product performance.</li>
+            <li>Designed analytics roadmaps and defined use cases to solve client problems through data-driven approaches.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-company">Accenture</div>
+              <div class="exp-role">Application Development Associate &nbsp;·&nbsp; India</div>
+            </div>
+            <span class="exp-badge">Sep 2021 – Oct 2022</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed and maintained business data reports using SAP ABAP on SAP HANA (an in-memory enterprise database platform), including Classical, Interactive, and ALV report types.</li>
+            <li>Worked with SAP HANA data dictionary objects to manage and structure large enterprise datasets.</li>
+            <li>Collaborated with functional teams and clients to translate business requirements into technical data solutions, ensuring timely delivery.</li>
+            <li>Designed detailed technical specifications for data reporting and extraction components.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EDUCATION
+============================================================ -->
+<section id="education">
+  <div class="container">
+    <h2 class="section-title fade-in">Education</h2>
+
+    <div class="edu-grid">
+      <div class="edu-card fade-in">
+        <div class="edu-degree">Master of Information Technology (Data Science)</div>
+        <div class="edu-uni">Queensland University of Technology (QUT)</div>
+        <div class="edu-meta">Brisbane, Australia</div>
+        <div class="edu-year">Graduated 2025</div>
+      </div>
+      <div class="edu-card fade-in">
+        <div class="edu-degree">Bachelor of Technology, Mechanical Engineering</div>
+        <div class="edu-uni">Vellore Institute of Technology (VIT)</div>
+        <div class="edu-meta">Chennai, India</div>
+        <div class="edu-year">Graduated 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PROJECTS
+============================================================ -->
+<section id="projects" class="alt-bg">
+  <div class="container">
+    <h2 class="section-title fade-in">Featured Projects</h2>
+
+    <div class="projects-grid">
+
+      <!-- Brisbane Housing -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Brisbane-Housing-Affordability" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Brisbane Housing Affordability Analysis</h3>
+        <p class="pc-desc">Brisbane's housing supply is struggling to keep pace with rapid population growth — but the pressure isn't uniform across suburbs. This project combined Queensland government geospatial data, ABS population projections, and residential land supply data to map dwelling shortages across 92 Brisbane SA2 regions. A machine learning classifier was trained to label each suburb as low, medium, or high supply, achieving 83% accuracy and providing a data-driven view of where housing demand is most likely to outpace availability.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">GeoPandas</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Geospatial Analysis</span>
+          <span class="tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <!-- Nashville SQL -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Nashville-Housing-Data-Cleaning---SQL" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Nashville Housing Data Cleaning — SQL</h3>
+        <p class="pc-desc">Raw real estate data is rarely clean enough to analyse directly. This project took a messy Nashville housing dataset and transformed it into a fully structured, analysis-ready format entirely in PostgreSQL — populating missing property addresses via self-join, splitting combined address fields into discrete columns, standardising inconsistent values, and removing duplicate records using window functions and CTEs. It demonstrates the kind of rigorous SQL data engineering that underpins any reliable analytics pipeline.</p>
+        <div class="pc-tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Window Functions</span>
+          <span class="tag">CTEs</span>
+          <span class="tag">Data Cleaning</span>
+        </div>
+      </div>
+
+      <!-- Calories Burnt -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Calories-Burnt-Prediction" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Calories Burnt Prediction</h3>
+        <p class="pc-desc">Fitness trackers estimate calorie burn — but how accurate are they really? This project built and compared five machine learning models (Linear Regression, Lasso, Ridge, Random Forest, and XGBoost) to predict calories burned during exercise using physiological and activity data from 15,000 workout sessions. XGBoost delivered the best results, predicting calorie burn within ~10 calories on average with an R² of 0.947, while the comparison also exposed clear overfitting in Random Forest — a key insight for responsible model selection.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Seaborn</span>
+        </div>
+      </div>
+
+      <!-- Wine Type Deep Learning -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Wine-Type-Prediction-using-Deep-Learning" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Wine Type Prediction — Deep Learning</h3>
+        <p class="pc-desc">Can a machine distinguish red wine from white purely from its chemistry — without tasting it? This project trained a neural network on physicochemical measurements (acidity, alcohol content, sulphates, and more) sourced from over 6,500 samples in the UCI Machine Learning Repository. The model achieved 95.47% test accuracy and a ROC AUC of 0.98, demonstrating that deep learning can extract highly reliable classifications from structured scientific data using a clean three-layer neural network architecture.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Keras</span>
+          <span class="tag">Neural Networks</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">ROC AUC</span>
+        </div>
+      </div>
+
+      <!-- Movie EDA -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Movie-Dataset---Analysis-and-Visualization" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Movie Data Analysis &amp; Visualisation</h3>
+        <p class="pc-desc">What actually drives a movie's box office success — star power, critic scores, or sheer budget? This exploratory analysis examined 7,668 movies to identify which features most strongly predict gross earnings. Using regression plots, annotated heatmaps, and correlation analysis, the project found that budget is the single strongest predictor (correlation of 0.74), followed by audience votes (0.63). The analysis tells a clear, evidence-based story about the economics of the film industry that a non-technical stakeholder could immediately act on.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+          <span class="tag">EDA</span>
+          <span class="tag">Correlation Analysis</span>
+        </div>
+      </div>
+
+      <!-- Movie Recommender -->
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <a href="https://github.com/SamadZaheer/Movie-Recommendation-System" target="_blank" rel="noopener noreferrer" class="pc-gh">
+            GitHub
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+        <h3 class="pc-title">Movie Recommendation System</h3>
+        <p class="pc-desc">Recommendation engines power Netflix, Spotify, and Amazon — but how do they actually work? This project built a content-based movie recommender from scratch using the TMDB 5,000 dataset. Each film was encoded as a text vector combining genres, cast, director, and plot keywords, then cosine similarity was used to find the closest thematic matches. Searching for "Avatar" surfaces Guardians of the Galaxy and Star Trek — showing the system has learned genuine semantic relationships between films. Collaborative filtering via SVD matrix factorisation was also explored as a complementary approach.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NLP</span>
+          <span class="tag">CountVectorizer</span>
+          <span class="tag">Cosine Similarity</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">Pandas</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="projects-footer fade-in">
+      <a href="https://github.com/SamadZaheer?tab=repositories" target="_blank" rel="noopener noreferrer" class="view-all-link">View All Projects →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SKILLS
+============================================================ -->
+<section id="skills">
+  <div class="container">
+    <h2 class="section-title fade-in">Skills</h2>
+
+    <div class="skills-grid">
+
+      <div class="skill-group fade-in">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">SQL</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in">
+        <h3>Libraries &amp; Frameworks</h3>
+        <div class="skill-tags">
+          <span class="skill-pill">Pandas</span>
+          <span class="skill-pill">NumPy</span>
+          <span class="skill-pill">Scikit-learn</span>
+          <span class="skill-pill">TensorFlow</span>
+          <span class="skill-pill">Keras</span>
+          <span class="skill-pill">Matplotlib</span>
+          <span class="skill-pill">Seaborn</span>
+          <span class="skill-pill">Plotly</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in">
+        <h3>Databases</h3>
+        <div class="skill-tags">
+          <span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">SAP HANA</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in">
+        <h3>Visualisation</h3>
+        <div class="skill-tags">
+          <span class="skill-pill">Power BI</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Microsoft Suite</span>
+        </div>
+      </div>
+
+      <div class="skill-group fade-in">
+        <h3>Tools &amp; Platforms</h3>
+        <div class="skill-tags">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+          <span class="skill-pill">Jupyter Notebook</span>
+          <span class="skill-pill">Google Colab</span>
+          <span class="skill-pill">JIRA</span>
+          <span class="skill-pill">SAP ABAP</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CERTIFICATIONS
+============================================================ -->
+<section id="certifications" class="alt-bg">
+  <div class="container">
+    <h2 class="section-title fade-in">Certifications &amp; Awards</h2>
+
+    <div class="certs-grid">
+
+      <div class="cert-card fade-in">
+        <div class="cert-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">Microsoft Certified: Power BI Data Analyst Associate (PL-300)</div>
+          <div class="cert-issuer">Microsoft</div>
+          <div class="cert-meta">Earned Oct 2025 &nbsp;·&nbsp; ID: DFA2E1955C1A1F1C</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-in">
+        <div class="cert-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">The Complete SQL Bootcamp</div>
+          <div class="cert-issuer">Udemy</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-in">
+        <div class="cert-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">Tableau 2022 A-Z: Hands-On Tableau Training for Data Science</div>
+          <div class="cert-issuer">Udemy</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-in">
+        <div class="cert-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">Excel Skills for Business: Essentials</div>
+          <div class="cert-issuer">Coursera</div>
+        </div>
+      </div>
+
+      <div class="cert-card fade-in">
+        <div class="cert-icon-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">International Student Scholarship 2024</div>
+          <div class="cert-issuer">Queensland University of Technology (QUT)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <h2 class="section-title">Get In Touch</h2>
+    <p class="contact-intro">
+      I'm currently open to Data Analyst and Data Science opportunities in Australia. Whether you have a role in mind, a project to discuss, or simply want to connect — my inbox is always open.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:samadzaheer258@gmail.com" class="contact-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        samadzaheer258@gmail.com
+      </a>
+      <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/samadzaheer" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <p>Designed &amp; built by <span>Samad Zaheer</span> &nbsp;·&nbsp; Brisbane, Australia &nbsp;·&nbsp; 2026</p>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // ---- Hamburger ----
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+
+  function closeMob() {
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+  }
+
+  // ---- Navbar scroll shadow ----
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // ---- Active nav link ----
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  function setActiveNav() {
+    const scrollY = window.scrollY + 90;
+    sections.forEach(sec => {
+      if (scrollY >= sec.offsetTop && scrollY < sec.offsetTop + sec.offsetHeight) {
+        navLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + sec.id);
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', setActiveNav, { passive: true });
+  setActiveNav();
+
+  // ---- Scroll-fade (staggered siblings) ----
+  const faders = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      // Stagger siblings in same parent
+      const siblings = Array.from(entry.target.parentElement.querySelectorAll('.fade-in'));
+      const idx = siblings.indexOf(entry.target);
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, idx * 70);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+  faders.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
