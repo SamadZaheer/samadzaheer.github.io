@@ -1002,11 +1002,12 @@
       <!-- Calories Burnt -->
       <div class="project-card fade-in">
         <div class="pc-header">
-          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
             <a href="https://samadzaheer-calories-burnt.streamlit.app" target="_blank" rel="noopener noreferrer" class="pc-gh">
               Live Demo
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
+            <span style="color:#4a5568;font-size:0.75rem;">|</span>
             <a href="https://github.com/SamadZaheer/Calories-Burnt-Prediction" target="_blank" rel="noopener noreferrer" class="pc-gh">
               GitHub
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
@@ -1014,7 +1015,7 @@
           </div>
         </div>
         <h3 class="pc-title">Calories Burnt Prediction</h3>
-        <p class="pc-desc">Fitness trackers estimate calorie burn — but how accurate are they really? This project built and compared five machine learning models (Linear Regression, Lasso, Ridge, Random Forest, and XGBoost) to predict calories burned during exercise using physiological and activity data from 15,000 workout sessions. XGBoost delivered the best results, predicting calorie burn within ~10 calories on average with an R² of 0.947, while the comparison also exposed clear overfitting in Random Forest — a key insight for responsible model selection. With XGBoost predicting calorie expenditure within ~10 calories on average (R² = 0.947), the model is accurate enough to power real-time feedback loops in wearables applications or personalised health coaching platforms.</p>
+        <p class="pc-desc">Fitness trackers estimate calorie burn — but how accurate are they really? This project built and compared five machine learning models (Linear Regression, Lasso, Ridge, Random Forest, and XGBoost) to predict calories burned during exercise using physiological and activity data from 15,000 workout sessions. XGBoost delivered the best results, achieving an R² of 0.9990 and MAE of 1.38 kcal, while the comparison also exposed clear overfitting in Random Forest — a key insight for responsible model selection. The model is accurate enough to power real-time feedback loops in wearables applications or personalised health coaching platforms.</p>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">XGBoost</span>
