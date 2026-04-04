@@ -976,7 +976,7 @@
           </div>
         </div>
         <h3 class="pc-title">Brisbane Housing Affordability Analysis</h3>
-        <p class="pc-desc">Brisbane's housing supply is struggling to keep pace with rapid population growth — but the pressure isn't uniform across suburbs. This project combined Queensland government geospatial data, ABS population projections, and residential land supply data to map dwelling shortages across 92 Brisbane SA2 regions. A machine learning classifier was trained to label each suburb as low, medium, or high supply, achieving 83% accuracy and providing a data-driven view of where housing demand is most likely to outpace availability. The model's suburb-level risk scores provide a data-driven input for local government planners and property developers making supply decisions — replacing expensive manual survey analysis with an automated, regularly-updatable classifier that can be re-run as new ABS or CoreLogic data becomes available.</p>
+        <p class="pc-desc">Brisbane's housing supply is struggling to keep pace with rapid population growth — but the pressure isn't uniform across suburbs. This project combined Queensland Spatial Catalogue geospatial data, ABS population projections, and residential land supply data to map dwelling shortages across 33 Brisbane SA2 regions. 571 land parcels were aggregated to SA2 level and merged with population projections through 2046. A Random Forest Classifier (83% accuracy) labelled each region as Low, Medium, or High supply, while a Random Forest Regressor (R²=0.489) estimated dwelling yield — revealing where housing demand is most likely to outpace availability.</p>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">GeoPandas</span>
@@ -984,6 +984,8 @@
           <span class="tag">Scikit-learn</span>
           <span class="tag">Geospatial Analysis</span>
           <span class="tag">Matplotlib</span>
+          <span class="tag">Folium</span>
+          <span class="tag">Plotly</span>
         </div>
       </div>
 
@@ -1126,6 +1128,8 @@
           <span class="skill-pill">Seaborn</span>
           <span class="skill-pill">Plotly</span>
           <span class="skill-pill">XGBoost</span>
+          <span class="skill-pill">GeoPandas</span>
+          <span class="skill-pill">Folium</span>
         </div>
       </div>
 
