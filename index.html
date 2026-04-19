@@ -962,6 +962,37 @@
 
     <div class="projects-grid">
 
+      <div class="project-card fade-in">
+        <div class="pc-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <a href="https://huggingface.co/spaces/samadzaheer/asx-sentiment" target="_blank" rel="noopener noreferrer" class="pc-gh">
+              Live Demo
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+            <span style="color:#4a5568;font-size:0.75rem;">|</span>
+            <a href="https://github.com/SamadZaheer/asx-sentiment-analyser" target="_blank" rel="noopener noreferrer" class="pc-gh">
+              GitHub
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="pc-title">ASX Financial News Sentiment Analyser</h3>
+        <p class="pc-desc">ASX's financial news cycle moves stock prices — but by how much, and how fast? This project built a complete NLP research pipeline to find out. Financial news headlines for five ASX-listed companies (CBA, BHP, NAB, WES, ANZ) are scraped from live RSS feeds and scored using FinBERT — a BERT-based model pre-trained on financial text — producing a continuous sentiment signal from −1.0 (very bearish) to +1.0 (very bullish). Daily sentiment scores are joined to 90 days of adjusted closing prices via yfinance and correlated against 1, 5, and 10-day forward returns. A Pearson correlation of r = +0.34 was found at the 1-day window — directionally consistent with the hypothesis. Results are displayed in an interactive Streamlit dashboard deployed via Docker on HuggingFace Spaces, with ticker filtering, sentiment trend charts, and a price vs sentiment overlay.</p>
+        <div class="pc-tags">
+          <span class="tag">Python</span>
+          <span class="tag">FinBERT</span>
+          <span class="tag">HuggingFace Transformers</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">NLP</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Plotly</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">Docker</span>
+          <span class="tag">yfinance</span>
+        </div>
+      </div>
+
       <!-- Brisbane Housing -->
       <div class="project-card fade-in">
         <div class="pc-header">
@@ -1008,28 +1039,6 @@
           <span class="tag">Window Functions</span>
           <span class="tag">CTEs</span>
           <span class="tag">Data Cleaning</span>
-        </div>
-      </div>
-
-      <!-- COVID-19 SQL -->
-      <div class="project-card fade-in">
-        <div class="pc-header">
-          <a href="https://github.com/SamadZaheer/Covid-Data-Analysis---SQL" target="_blank" rel="noopener noreferrer" class="pc-gh">
-            GitHub
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>
-        <h3 class="pc-title">COVID-19 Global Data Analysis — SQL</h3>
-        <p class="pc-desc">Global pandemic data tells a compelling story — but only if you know how to query it. This project analysed real-world COVID-19 data across 200+ countries using PostgreSQL, joining two datasets (CovidDeaths and CovidVaccinations) to track infection rates, mortality trends, and vaccination rollout over time. Death percentage calculations revealed how survival odds varied country by country; window functions with PARTITION BY tracked cumulative vaccination progress as a rolling sum across dates; and continent-level aggregations surfaced which regions bore the heaviest burden. A temporary table stored vaccination coverage calculations, and a production-ready SQL View was built to pipe clean, structured data directly into BI tools like Tableau and Power BI — making this an end-to-end pipeline from raw ingestion to visualisation-ready output.</p>
-        <div class="pc-tags">
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Window Functions</span>
-          <span class="tag">Joins</span>
-          <span class="tag">Aggregations</span>
-          <span class="tag">Temp Tables</span>
-          <span class="tag">Views</span>
-          <span class="tag">EDA</span>
         </div>
       </div>
 
@@ -1159,6 +1168,8 @@
           <span class="skill-pill">XGBoost</span>
           <span class="skill-pill">GeoPandas</span>
           <span class="skill-pill">Folium</span>
+          <span class="skill-pill">PyTorch</span>
+          <span class="skill-pill">HuggingFace Transformers</span>
         </div>
       </div>
 
@@ -1168,6 +1179,7 @@
           <span class="skill-pill">PostgreSQL</span>
           <span class="skill-pill">SAP HANA</span>
           <span class="skill-pill">MySQL</span>
+          <span class="skill-pill">SQLite</span>
         </div>
       </div>
 
@@ -1189,6 +1201,8 @@
           <span class="skill-pill">JIRA</span>
           <span class="skill-pill">Confluence</span>
           <span class="skill-pill">Streamlit</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">HuggingFace Spaces</span>
           <span class="skill-pill">Microsoft Suite</span>
         </div>
       </div>
