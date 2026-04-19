@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Samad Zaheer — Data Scientist & Data Analyst based in Brisbane, Australia. Masters graduate from QUT specialising in machine learning, SQL, and data visualisation." />
+  <meta name="description" content="Samad Zaheer, Data Scientist and Data Analyst. QUT graduate with 2.5 years of experience across Accenture and Schneider Electric. Python, SQL, Power BI, Machine Learning." />
+  <meta name="keywords" content="data scientist, data analyst, Python, SQL, machine learning, Power BI, Tableau, Accenture, Schneider Electric, QUT, geospatial, analytics" />
+  <meta property="og:title" content="Samad Zaheer | Data Scientist & Data Analyst" />
+  <meta property="og:description" content="QUT graduate with 2.5 years of industry experience in analytics, dashboards, and ML." />
   <title>Samad Zaheer | Data Scientist & Data Analyst</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,6 +45,25 @@
       line-height: 1.7;
       overflow-x: hidden;
       background: var(--white);
+    }
+
+    /* Full-page cursor glow (position updated via JS) */
+    #cursor-glow {
+      position: fixed;
+      inset: 0;
+      z-index: 8500;
+      pointer-events: none;
+      --glow-x: 25vw;
+      --glow-y: 25vh;
+      background: radial-gradient(
+        100px circle at var(--glow-x) var(--glow-y),
+        rgba(100, 255, 218, 0.14),
+        rgba(13, 148, 136, 0.07) 42%,
+        transparent 72%
+      );
+    }
+    @media (hover: none) and (pointer: coarse) {
+      #cursor-glow { display: none; }
     }
 
     a { text-decoration: none; }
@@ -93,9 +115,22 @@
       padding: 7px 13px;
       border-radius: var(--radius);
       transition: color var(--transition), background var(--transition);
+      position: relative;
     }
     .nav-links a:hover,
     .nav-links a.active { color: var(--accent-bright); background: rgba(100,255,218,.07); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 13px;
+      width: 0;
+      height: 1.5px;
+      background: #00d4aa;
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: calc(100% - 26px); }
 
     /* Hamburger */
     .hamburger {
@@ -150,6 +185,105 @@
       max-width: var(--max-w);
       margin: 0 auto;
       width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text { position: relative; }
+
+    /* Geometric decoratives — sits on hero navy, outside .hero-photo-grid top-right */
+    .hero-photo-column {
+      position: relative;
+    }
+    .hero-circle-deco {
+      position: absolute;
+      /* 40px circle + ~12px gap above grid top; outward past grid right edge */
+      top: calc(-40px - 14px);
+      right: -18px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .hero-circle-deco::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 212, 170, 0.2);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-circle-deco::before { animation: breathe 4s ease-in-out infinite; }
+    }
+    .deco-orbit-wrapper {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
+      transform-origin: 0 0;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .deco-orbit-wrapper { animation: orbit 7s linear infinite; }
+    }
+    .deco-orbit-dot {
+      position: absolute;
+      width: 5px; height: 5px;
+      background: #00d4aa;
+      border-radius: 50%;
+      top: -2.5px;
+      left: 20px;
+    }
+    .hero-dot-deco {
+      position: absolute;
+      top: -10px;
+      right: 15px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-bright);
+      border-radius: 50%;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-dot-deco { animation: pulse-dot 2.5s ease-in-out infinite; }
+    }
+
+    /* Ticker */
+    .ticker-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUpMuted .45s ease forwards .05s;
+    }
+    .ticker-line {
+      width: 40px;
+      height: 1px;
+      background: var(--accent-bright);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+    .ticker-scroll-outer {
+      overflow: hidden;
+      max-width: 500px;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+    .ticker-scroll-inner {
+      display: flex;
+      white-space: nowrap;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      opacity: 0.65;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .ticker-scroll-inner { animation: ticker-scroll 14s linear infinite; }
     }
 
     .hero-greeting {
@@ -164,12 +298,13 @@
     .hero-name {
       font-size: clamp(2.6rem, 6.5vw, 5rem);
       font-weight: 800;
-      color: #e6f1ff;
-      line-height: 1.08;
+      line-height: 1.05;
       margin-bottom: 10px;
       opacity: 0;
       animation: fadeUp .55s ease forwards .3s;
     }
+    .name-first { color: #ffffff; display: block; }
+    .name-last  { color: var(--accent-bright); display: block; }
 
     .hero-title {
       font-size: clamp(1.4rem, 3.5vw, 2.8rem);
@@ -198,9 +333,44 @@
       font-size: 1.05rem;
       max-width: 560px;
       line-height: 1.8;
-      margin-bottom: 44px;
+      margin-bottom: 32px;
       opacity: 0;
       animation: fadeUp .55s ease forwards .65s;
+    }
+
+    /* Quick-stats strip */
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp .55s ease forwards .72s;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 0 28px;
+    }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-num {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      line-height: 1;
+      font-family: 'Inter', sans-serif;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,.08);
+      flex-shrink: 0;
     }
 
     .hero-cta {
@@ -210,25 +380,6 @@
       flex-wrap: wrap;
       opacity: 0;
       animation: fadeUp .55s ease forwards .8s;
-    }
-
-    .btn-outline {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent-bright);
-      border: 1.5px solid var(--accent-bright);
-      padding: 13px 26px;
-      border-radius: var(--radius);
-      font-size: .875rem;
-      font-weight: 600;
-      letter-spacing: .03em;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .btn-outline:hover {
-      background: rgba(100,255,218,.09);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(100,255,218,.12);
     }
 
     .social-row { display: flex; gap: 10px; }
@@ -248,6 +399,37 @@
       border-color: var(--accent-bright);
       background: rgba(100,255,218,.07);
       transform: translateY(-2px);
+    }
+
+    /* Photo grid */
+    .hero-photo-grid {
+      min-height: 520px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp .6s ease forwards .5s;
+    }
+    .hero-photo-grid-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+      min-height: 520px;
+    }
+    .photo-grid-tile {
+      background: #112233;
+      border: 1px solid rgba(100,255,218,.1);
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-grid-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .photo-grid-tile:hover img {
+      transform: scale(1.04);
     }
 
     /* ===== SECTION COMMONS ===== */
@@ -402,7 +584,22 @@
       font-size: .875rem;
       font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 18px;
+      margin-bottom: 10px;
+    }
+
+    /* Specialisation tags */
+    .exp-spec-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .exp-spec-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border: 1px solid rgba(13,148,136,.25);
+      border-radius: 20px;
+      color: var(--accent);
     }
 
     .exp-bullets { display: flex; flex-direction: column; gap: 9px; }
@@ -480,7 +677,7 @@
       padding: 28px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       transition: box-shadow var(--transition), transform var(--transition);
     }
     .project-card:hover {
@@ -513,11 +710,39 @@
       line-height: 1.35;
     }
 
+    /* Project body: one-liner + bullets */
+    .pc-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
     .pc-desc {
       font-size: .855rem;
       color: #a8b2d8;
       line-height: 1.75;
-      flex: 1;
+    }
+    .pc-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding: 0;
+      list-style: none;
+    }
+    .pc-bullets li {
+      font-size: .835rem;
+      color: #a8b2d8;
+      line-height: 1.65;
+      padding-left: 16px;
+      position: relative;
+    }
+    .pc-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-bright);
+      font-size: .9rem;
+      line-height: 1.55;
     }
 
     .pc-tags {
@@ -540,7 +765,7 @@
 
     .projects-footer {
       text-align: center;
-      margin-top: 36px;
+      margin-top: 32px;
     }
 
     .view-all-link {
@@ -622,6 +847,18 @@
     }
     .cert-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
 
+    /* Featured certification */
+    .cert-card.featured {
+      border-left: 3px solid var(--accent);
+      background: var(--white);
+    }
+    .cert-id {
+      font-family: 'Fira Code', monospace;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     .cert-icon-wrap {
       width: 40px; height: 40px;
       background: rgba(13,148,136,.08);
@@ -654,6 +891,63 @@
       white-space: nowrap;
     }
 
+    /* ===== BEYOND WORK ===== */
+    #beyond {
+      background: var(--navy);
+      padding: 100px 0;
+    }
+    #beyond .section-title {
+      color: #e6f1ff;
+    }
+    #beyond .section-title::after {
+      background: var(--accent-bright);
+    }
+    .beyond-sub {
+      font-size: .875rem;
+      color: var(--text-muted);
+      margin-top: -36px;
+      margin-bottom: 52px;
+    }
+    .beyond-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .beyond-card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(100,255,218,.1);
+      border-top: 2px solid transparent;
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .beyond-card:hover {
+      border-top-color: #00d4aa;
+      transform: translateY(-3px);
+    }
+    .beyond-icon {
+      color: var(--accent-bright);
+      font-size: 22px;
+      margin-bottom: 12px;
+      line-height: 1;
+      display: inline-block;
+      transition: filter 0.3s ease;
+    }
+    .beyond-card:hover .beyond-icon {
+      filter: drop-shadow(0 0 6px rgba(0,212,170,.5));
+    }
+    .beyond-card h3 {
+      font-size: .975rem;
+      font-weight: 700;
+      color: #e6f1ff;
+      margin-bottom: 10px;
+    }
+    .beyond-card p {
+      font-size: .855rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
     /* ===== CONTACT ===== */
     #contact {
       background: var(--navy);
@@ -674,6 +968,12 @@
       left: 50%;
       transform: translateX(-50%);
       background: var(--accent-bright);
+    }
+
+    .contact-availability {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
     }
 
     .contact-intro {
@@ -728,11 +1028,34 @@
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes fadeUpMuted {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 0.65; transform: translateY(0); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1.0); opacity: 1; }
+      50%       { transform: scale(1.1); opacity: 0.5; }
+    }
+    @keyframes orbit {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1.0; }
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 960px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-column { display: none; }
       .about-grid { grid-template-columns: 1fr; gap: 44px; }
       .edu-grid { grid-template-columns: 1fr; }
+      .beyond-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 720px) {
@@ -755,6 +1078,8 @@
 
       .hero-cta { flex-direction: column; align-items: flex-start; }
       .contact-links { flex-direction: column; align-items: stretch; }
+
+      .stat-item { padding: 0 16px; }
     }
 
     @media (max-width: 480px) {
@@ -765,6 +1090,7 @@
 </head>
 
 <body>
+<div id="cursor-glow" aria-hidden="true"></div>
 
 <!-- ============================================================
      NAVBAR
@@ -802,41 +1128,85 @@
 ============================================================ -->
 <section id="hero">
   <div class="hero-inner">
-    <p class="hero-greeting">Hi, I'm</p>
-    <h1 class="hero-name">Samad Zaheer</h1>
-    <h2 class="hero-title">Data Scientist &amp; Data Analyst</h2>
 
-    <div class="hero-location">
-      <!-- map-pin icon -->
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Brisbane, QLD, Australia
-    </div>
+    <!-- Left: text column -->
+    <div class="hero-text">
+      <!-- Ticker -->
+      <div class="ticker-wrap" aria-hidden="true">
+        <!-- <div class="ticker-line"></div> -->
+        <div class="ticker-scroll-outer">
+          <div class="ticker-scroll-inner">
+            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
 
-    <p class="hero-intro">
-      Master of Information Technology — Data Science graduate from QUT Brisbane, with 2.5 years of industry experience across analytics systems, dashboards, and reporting for enterprise clients at Accenture and Schneider Electric. I specialise in turning messy real-world data into clear business decisions — from geospatial housing analysis to machine learning pipelines. Currently open to Data Scientist and Analyst roles across Australia.
-    </p>
+      <p class="hero-greeting">Hi, I'm</p>
 
-    <div class="hero-cta">
-      <!-- Resume available: uncomment the line below and remove the button to re-enable -->
-      <!-- <a href="./Samad_Zaheer_Resume.pdf" class="btn-outline" download> -->
-      <button class="btn-outline" disabled title="Resume coming soon" style="cursor:not-allowed;opacity:0.55;">
-        <!-- download icon -->
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Resume Coming Soon
-      </button>
-      <!-- </a> -->
-      <div class="social-row">
-        <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        </a>
-        <a href="https://www.linkedin.com/in/samadzaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="mailto:samadzaheer258@gmail.com" class="icon-btn" aria-label="Email">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
+      <h1 class="hero-name">
+        <span class="name-first">Samad</span>
+        <span class="name-last">Zaheer</span>
+      </h1>
+
+      <h2 class="hero-title">Data Scientist &amp; Data Analyst</h2>
+
+      <p class="hero-intro">
+        Master's graduate from Queensland University of Technology with 2.5 years of experience across Accenture and Schneider Electric. I turn messy real-world data into clear business decisions, from IoT analytics to machine learning pipelines.
+      </p>
+
+      <!-- Quick-stats strip -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">2.5 yrs</span>
+          <span class="stat-label">Industry Experience</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">35+</span>
+          <span class="stat-label">Dashboards Deployed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">6+</span>
+          <span class="stat-label">Deployed Projects</span>
+        </div>
+      </div>
+
+      <div class="hero-cta">
+        <div class="social-row">
+          <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/samadzaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="mailto:samadzaheer258@gmail.com" class="icon-btn" aria-label="Email">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
       </div>
     </div>
+
+    <!-- Right: photo grid + orbit deco (deco sits outside grid, in hero margin) -->
+    <div class="hero-photo-column" aria-hidden="true">
+      <div class="hero-circle-deco" aria-hidden="true">
+        <div class="deco-orbit-wrapper">
+          <div class="deco-orbit-dot"></div>
+        </div>
+      </div>
+      <div class="hero-photo-grid">
+        <div class="hero-photo-grid-inner">
+          <div class="photo-grid-tile"><img src="images/IMG_2247.jpeg" alt="Photo 1" /></div>
+          <div class="photo-grid-tile"><img src="images/_ (2).jpeg" alt="Photo 2" /></div>
+          <div class="photo-grid-tile"><img src="images/IMG_7364.JPG" alt="Photo 3" /></div>
+          <div class="photo-grid-tile"><img src="images/_ (3).jpeg" alt="Photo 4" /></div>
+          <div class="photo-grid-tile"><img src="images/27d557c2-28c2-4a56-b082-34a700931d55 copy.JPG" alt="Photo 5" /></div>
+          <div class="photo-grid-tile"><img src="images/football.jpeg" alt="Photo 6" /></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -850,15 +1220,14 @@
 
     <div class="about-grid">
       <div class="about-text fade-in">
-        <p>I'm a data professional based in Brisbane, Australia, with a Master of Information Technology — Data Science from Queensland University of Technology. My work sits at the intersection of analytics and machine learning — I'm equally comfortable writing complex SQL to clean and transform a dataset as I am building a neural network to classify it.</p>
-        <p>Before my postgraduate studies, I worked as a Business Analyst at Zenatix by Schneider Electric and as an Application Development Associate at Accenture, building data reporting systems and analytics dashboards for enterprise clients across energy management and enterprise software. That commercial experience shapes how I think about problems: with a focus on clarity, business relevance, and reproducible results.</p>
-        <p>I'm particularly drawn to roles where data decisions carry real operational weight — finance, government, energy, or product — where I can work across the full pipeline from data engineering to stakeholder-facing insight. I care as much about explaining a model's outputs to a non-technical audience as I do about optimising it. Open to roles across Australia.</p>
+        <p>I'm a data professional with a Master of Information Technology - Data Science from QUT, Brisbane. My work sits at the intersection of analytics and machine learning. I'm equally comfortable writing complex SQL to clean enterprise datasets as I am training a Random Forest to classify them.</p>
+        <p>My commercial background across Accenture and Schneider Electric shaped how I approach problems. I focus on business relevance, clarity and reproducible outputs. I am particularly drawn to roles in finance, government or energy, where data decisions carry real operational weight across the full pipeline.</p>
       </div>
 
       <div class="about-cards fade-in">
         <div class="about-card">
           <h4>Education</h4>
-          <p>Master of Information Technology — Data Science<br>QUT Brisbane — 2025</p>
+          <p>Master of Information Technology - Data Science<br>QUT, Brisbane · 2025</p>
         </div>
         <div class="about-card">
           <h4>Experience</h4>
@@ -866,7 +1235,7 @@
         </div>
         <div class="about-card">
           <h4>Location</h4>
-          <p>Brisbane, QLD — open to roles across Australia</p>
+          <p>Open to relocation</p>
         </div>
         <div class="about-card">
           <h4>Specialisation</h4>
@@ -896,11 +1265,17 @@
             </div>
             <span class="exp-badge">Nov 2022 – Jan 2024</span>
           </div>
+          <div class="exp-spec-tags">
+            <span class="exp-spec-tag">Analytics</span>
+            <span class="exp-spec-tag">IoT Dashboards</span>
+            <span class="exp-spec-tag">Client Reporting</span>
+          </div>
           <ul class="exp-bullets">
             <li>Designed and deployed 35+ customised client dashboards monitoring real-time IoT and operational data across retail and QSR building sites, improving system uptime by 20% and reducing incident response time by 30% through proactive anomaly detection.</li>
             <li>Implemented IoT-driven analytics solutions for small and mid-sized buildings, leveraging operational sensor data to identify optimisation opportunities and deliver consistent 8–10% energy savings per client deployment.</li>
             <li>Created and presented monthly governance reports to enterprise clients, translating complex site data into clear insights and anomaly flags; developed data-driven business cases for pilot projects covering energy savings, electrical health monitoring, and operational visibility.</li>
             <li>Maintained a customer satisfaction score of 4.8/5 across all implementations by delivering high-quality data solutions and communicating technical findings as clear, actionable business recommendations.</li>
+
           </ul>
         </div>
       </div>
@@ -914,12 +1289,17 @@
             </div>
             <span class="exp-badge">Sep 2021 – Oct 2022</span>
           </div>
+          <div class="exp-spec-tags">
+            <span class="exp-spec-tag">SAP ABAP</span>
+            <span class="exp-spec-tag">SQL Pipelines</span>
+            <span class="exp-spec-tag">Enterprise Reporting</span>
+          </div>
           <ul class="exp-bullets">
-  <li>Developed automated data extraction and reporting pipelines using SAP ABAP on SAP HANA, delivering financial and supply chain reporting solutions across 10+ enterprise client accounts.</li>
-  <li>Optimised SQL queries through restructuring and indexing, reducing average report generation time by 15% across high-volume financial reporting workflows.</li>
-  <li>Managed and structured large enterprise datasets using SAP HANA data dictionary objects, ensuring data integrity and consistency across reporting systems.</li>
-  <li>Collaborated with functional analysts and client stakeholders to translate business requirements into technical specifications, ensuring on-time delivery of data solutions.</li>
-</ul>
+            <li>Developed automated data extraction and reporting pipelines using SAP ABAP on SAP HANA, delivering financial and supply chain reporting solutions across 10+ enterprise client accounts.</li>
+            <li>Optimised SQL queries through restructuring and indexing, reducing average report generation time by 15% across high-volume financial reporting workflows.</li>
+            <li>Managed and structured large enterprise datasets using SAP HANA data dictionary objects, ensuring data integrity and consistency across reporting systems.</li>
+            <li>Collaborated with functional analysts and client stakeholders to translate business requirements into technical specifications, ensuring on-time delivery of data solutions.</li>
+          </ul>
         </div>
       </div>
 
@@ -937,7 +1317,7 @@
 
     <div class="edu-grid">
       <div class="edu-card fade-in">
-        <div class="edu-degree">Master of Information Technology — Data Science</div>
+        <div class="edu-degree">Master of Information Technology - Data Science</div>
         <div class="edu-uni">Queensland University of Technology (QUT)</div>
         <div class="edu-meta">Brisbane, Australia</div>
         <div class="edu-year">Graduated 2025</div>
@@ -962,6 +1342,7 @@
 
     <div class="projects-grid">
 
+      <!-- ASX Sentiment -->
       <div class="project-card fade-in">
         <div class="pc-header">
           <div style="display:flex;align-items:center;gap:10px;">
@@ -977,7 +1358,14 @@
           </div>
         </div>
         <h3 class="pc-title">ASX Financial News Sentiment Analyser</h3>
-        <p class="pc-desc">ASX's financial news cycle moves stock prices — but by how much, and how fast? This project built a complete NLP research pipeline to find out. Financial news headlines for five ASX-listed companies (CBA, BHP, NAB, WES, ANZ) are scraped from live RSS feeds and scored using FinBERT — a BERT-based model pre-trained on financial text — producing a continuous sentiment signal from −1.0 (very bearish) to +1.0 (very bullish). Daily sentiment scores are joined to 90 days of adjusted closing prices via yfinance and correlated against 1, 5, and 10-day forward returns. A Pearson correlation of r = +0.34 was found at the 1-day window — directionally consistent with the hypothesis. Results are displayed in an interactive Streamlit dashboard deployed via Docker on HuggingFace Spaces, with ticker filtering, sentiment trend charts, and a price vs sentiment overlay.</p>
+        <div class="pc-body">
+          <p class="pc-desc">Scraped live financial news for five ASX-listed companies (CBA, BHP, NAB, WES, ANZ) and scored headlines using FinBERT to build a continuous sentiment signal correlated against stock price movements.</p>
+          <ul class="pc-bullets">
+            <li>Pearson correlation of r = +0.34 at the 1-day forward return window, directionally consistent with the hypothesis</li>
+            <li>FinBERT (BERT pre-trained on financial text) produces scores from −1.0 (bearish) to +1.0 (bullish), joined to 90-day adjusted close prices via yfinance</li>
+            <li>Interactive Streamlit dashboard deployed via Docker on HuggingFace Spaces, live and publicly accessible</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">FinBERT</span>
@@ -1009,7 +1397,14 @@
           </div>
         </div>
         <h3 class="pc-title">Brisbane Housing Affordability Analysis</h3>
-        <p class="pc-desc">Brisbane's housing supply is struggling to keep pace with rapid population growth — but the pressure isn't uniform across suburbs. This project combined Queensland Spatial Catalogue geospatial data, ABS population projections, and residential land supply data to map dwelling shortages across 33 Brisbane SA2 regions. 571 land parcels were aggregated to SA2 level and merged with population projections through 2046. A Random Forest Classifier (83% accuracy) labelled each region as Low, Medium, or High supply, while a Random Forest Regressor (R²=0.489) estimated dwelling yield — revealing where housing demand is most likely to outpace availability.</p>
+        <div class="pc-body">
+          <p class="pc-desc">Combined Queensland Spatial Catalogue geospatial data, ABS population projections, and residential land supply data across 33 Brisbane SA2 regions to map dwelling shortages.</p>
+          <ul class="pc-bullets">
+            <li>Random Forest Classifier achieved 83% accuracy labelling regions as Low/Medium/High supply</li>
+            <li>Random Forest Regressor (R²=0.489) estimated dwelling yield per region through 2046</li>
+            <li>Identified specific suburbs where housing demand is most likely to outpace supply, directly actionable for urban planners</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">GeoPandas</span>
@@ -1031,8 +1426,15 @@
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </div>
-        <h3 class="pc-title">Nashville Housing Data Cleaning — SQL</h3>
-        <p class="pc-desc">Raw real estate data is rarely clean enough to analyse directly. This project took a messy Nashville housing dataset and transformed it into a fully structured, analysis-ready format entirely in PostgreSQL — populating missing property addresses via self-join, splitting combined address fields into discrete columns, standardising inconsistent values, and removing duplicate records using window functions and CTEs. It demonstrates the kind of rigorous SQL data engineering that underpins any reliable analytics pipeline. This project demonstrates the data engineering discipline that sits beneath every reliable analytics pipeline — without clean, consistent data, even the most sophisticated models produce unreliable outputs. The techniques applied here (deduplication, self-joins, window functions, NULL handling) map directly to the first month's work in most data analyst roles.</p>
+        <h3 class="pc-title">Nashville Housing Data Cleaning: SQL</h3>
+        <div class="pc-body">
+          <p class="pc-desc">Transformed a messy Nashville real estate dataset into a fully structured, analysis-ready format entirely in PostgreSQL.</p>
+          <ul class="pc-bullets">
+            <li>Populated missing property addresses via self-join; split combined address fields into discrete columns</li>
+            <li>Removed duplicate records using window functions and CTEs; standardised inconsistent values across the dataset</li>
+            <li>Demonstrates the data engineering rigour that underpins any reliable analytics pipeline</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">PostgreSQL</span>
           <span class="tag">SQL</span>
@@ -1058,7 +1460,14 @@
           </div>
         </div>
         <h3 class="pc-title">Calories Burnt Prediction</h3>
-        <p class="pc-desc">Fitness trackers estimate calorie burn — but how accurate are they really? This project built and compared five machine learning models (Linear Regression, Lasso, Ridge, Random Forest, and XGBoost) to predict calories burned during exercise using physiological and activity data from 15,000 workout sessions. XGBoost delivered the best results, achieving an R² of 0.9990 and MAE of 1.38 kcal, while the comparison also exposed clear overfitting in Random Forest — a key insight for responsible model selection. The model is accurate enough to power real-time feedback loops in wearables applications or personalised health coaching platforms.</p>
+        <div class="pc-body">
+          <p class="pc-desc">Built and compared five ML models to predict calories burned using physiological and activity data from 15,000 workout sessions.</p>
+          <ul class="pc-bullets">
+            <li>XGBoost delivered R² of 0.9990 and MAE of 1.38 kcal, best-in-class accuracy</li>
+            <li>Comparison exposed clear overfitting in Random Forest, a key insight for responsible model selection</li>
+            <li>Accurate enough to power real-time feedback loops in wearables or personalised health coaching platforms</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">XGBoost</span>
@@ -1087,7 +1496,14 @@
           </div>
         </div>
         <h3 class="pc-title">Movie Data Analysis &amp; Visualisation</h3>
-        <p class="pc-desc">What actually drives a movie's box office success — star power, critic scores, or sheer budget? This exploratory analysis examined 7,668 movies to identify which features most strongly predict gross earnings. Using regression plots, annotated heatmaps, correlation analysis, and an interactive Tableau dashboard, the project found that budget is the single strongest predictor (correlation of 0.74), followed by audience votes (0.63). The analysis tells a clear, evidence-based story about the economics of the film industry that a non-technical stakeholder could immediately act on. These findings are directly actionable for studio acquisition teams and streaming platforms deciding where to allocate production investment — quantifying the return premium for high-budget productions and the relative fragility of critic-dependent releases in a market increasingly driven by audience scores.</p>
+        <div class="pc-body">
+          <p class="pc-desc">Examined 7,668 movies to identify which features most strongly predict gross earnings, combining Python EDA with an interactive Tableau dashboard.</p>
+          <ul class="pc-bullets">
+            <li>Budget is the single strongest predictor of box office success (correlation: 0.74), followed by audience votes (0.63)</li>
+            <li>Results are directly actionable for studio acquisition teams deciding where to allocate production investment</li>
+            <li>Findings presented as a clear, evidence-based narrative a non-technical stakeholder can immediately act on</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">Pandas</span>
@@ -1115,7 +1531,14 @@
           </div>
         </div>
         <h3 class="pc-title">Movie Recommendation System</h3>
-        <p class="pc-desc">Recommendation engines power Netflix, Spotify, and Amazon — but how do they actually work? This project built a content-based movie recommender from scratch using the TMDB 5,000 dataset. Each film was encoded as a text vector combining genres, cast, director, and plot keywords, then cosine similarity was used to find the closest thematic matches. Searching for "Avatar" surfaces Guardians of the Galaxy and Star Trek — showing the system has learned genuine semantic relationships between films. Collaborative filtering via SVD was also explored in the research notebook as a complementary approach.</p>
+        <div class="pc-body">
+          <p class="pc-desc">Built a content-based movie recommender from scratch using the TMDB 5,000 dataset, encoding each film as a text vector combining genres, cast, director, and plot keywords.</p>
+          <ul class="pc-bullets">
+            <li>Cosine similarity surfaces genuinely related films. Searching "Avatar" returns Guardians of the Galaxy and Star Trek</li>
+            <li>Explored collaborative filtering via SVD as a complementary approach in the research notebook</li>
+            <li>Deployed as an interactive Streamlit app</li>
+          </ul>
+        </div>
         <div class="pc-tags">
           <span class="tag">Python</span>
           <span class="tag">NLP</span>
@@ -1221,14 +1644,15 @@
 
     <div class="certs-grid">
 
-      <div class="cert-card fade-in">
+      <!-- Featured: Microsoft PL-300 -->
+      <div class="cert-card featured fade-in">
         <div class="cert-icon-wrap">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
         </div>
         <div>
           <div class="cert-name">Microsoft Certified: Power BI Data Analyst Associate (PL-300)</div>
-          <div class="cert-issuer">Microsoft</div>
-          <div class="cert-meta">Earned Oct 2025 &nbsp;·&nbsp; ID: DFA2E1955C1A1F1C</div>
+          <div class="cert-issuer">Microsoft Certified</div>
+          <div class="cert-id">Earned Oct 2025 &nbsp;·&nbsp; ID: DFA2E1955C1A1F1C</div>
         </div>
       </div>
 
@@ -1254,16 +1678,6 @@
 
       <div class="cert-card fade-in">
         <div class="cert-icon-wrap">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-        </div>
-        <div>
-          <div class="cert-name">Excel Skills for Business: Essentials</div>
-          <div class="cert-issuer">Coursera</div>
-        </div>
-      </div>
-
-      <div class="cert-card fade-in">
-        <div class="cert-icon-wrap">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
         <div>
@@ -1278,13 +1692,53 @@
 
 
 <!-- ============================================================
+     BEYOND WORK
+============================================================ -->
+<section id="beyond">
+  <div class="container">
+    <h2 class="section-title fade-in">Beyond Work</h2>
+    <p class="beyond-sub fade-in">The person behind the data</p>
+
+    <div class="beyond-grid">
+
+      <div class="beyond-card fade-in">
+        <div class="beyond-icon">⑩</div>
+        <h3>Football</h3>
+        <p>Five-a-side regular. Football is the one place where being wrong about a pattern costs you a goal, not just a meeting.</p>
+      </div>
+
+      <div class="beyond-card fade-in">
+        <div class="beyond-icon">◉</div>
+        <h3>Music</h3>
+        <p>Listener first. Playlists are the one dataset I curate with zero business objective and full commitment.</p>
+      </div>
+
+      <div class="beyond-card fade-in">
+        <div class="beyond-icon">➾</div>
+        <h3>Travel</h3>
+        <p>Restless traveller. Moving between places taught me that the same data tells completely different stories depending on who is reading it.</p>
+      </div>
+
+      <div class="beyond-card fade-in">
+        <div class="beyond-icon">✭</div>
+        <h3>Tinkering</h3>
+        <p>Personal projects that mostly go nowhere but always teach something. Currently playing with geospatial tools and NLP pipelines.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      CONTACT
 ============================================================ -->
 <section id="contact">
   <div class="contact-inner fade-in">
     <h2 class="section-title">Get In Touch</h2>
+    <p class="contact-availability">Currently open to Data Analyst and Data Scientist roles.</p>
     <p class="contact-intro">
-      I'm currently open to Data Analyst and Data Science opportunities in Australia. Whether you have a role in mind, a project to discuss, or simply want to connect — my inbox is always open.
+      Whether you have a role in mind, a project to discuss, or simply want to connect, my inbox is always open.
     </p>
     <div class="contact-links">
       <a href="mailto:samadzaheer258@gmail.com" class="contact-link">
@@ -1308,7 +1762,7 @@
      FOOTER
 ============================================================ -->
 <footer>
-  <p>Designed &amp; built by <span>Samad Zaheer</span> &nbsp;·&nbsp; Brisbane, Australia &nbsp;·&nbsp; 2026</p>
+  <p>Designed &amp; built by <span>Samad Zaheer</span> &nbsp;·&nbsp; 2026</p>
 </footer>
 
 
@@ -1360,7 +1814,6 @@
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      // Stagger siblings in same parent
       const siblings = Array.from(entry.target.parentElement.querySelectorAll('.fade-in'));
       const idx = siblings.indexOf(entry.target);
       setTimeout(() => {
@@ -1368,9 +1821,18 @@
       }, idx * 70);
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px 100px 0px' });
 
   faders.forEach(el => observer.observe(el));
+
+  // ---- Global cursor glow (full viewport) ----
+  const cursorGlow = document.getElementById('cursor-glow');
+  if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.setProperty('--glow-x', `${e.clientX}px`);
+      cursorGlow.style.setProperty('--glow-y', `${e.clientY}px`);
+    }, { passive: true });
+  }
 </script>
 
 </body>
