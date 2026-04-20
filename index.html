@@ -37,7 +37,7 @@
       --max-w:         1100px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -45,6 +45,7 @@
       line-height: 1.7;
       overflow-x: hidden;
       background: var(--white);
+      min-width: 0;
     }
 
     /* Full-page cursor glow (position updated via JS) */
@@ -332,7 +333,7 @@
     .hero-intro {
       color: var(--text-muted);
       font-size: 1.05rem;
-      max-width: 560px;
+      max-width: min(560px, 100%);
       line-height: 1.8;
       margin-bottom: 32px;
       opacity: 0;
@@ -851,7 +852,7 @@
 
     .certs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
       gap: 18px;
     }
 
@@ -976,7 +977,7 @@
     }
 
     .contact-inner {
-      max-width: 680px;
+      max-width: min(680px, 100%);
       margin: 0 auto;
       text-align: center;
     }
@@ -1132,22 +1133,33 @@
     @media (max-width: 480px) {
       #hero { padding: 90px 16px 48px; }
       .container { padding: 0 16px; }
+      .mobile-nav { padding: 12px 16px 20px; }
 
       .hero-name { font-size: clamp(2rem, 10vw, 3rem); }
+      .hero-title { font-size: clamp(1.1rem, 5vw, 1.6rem); }
 
       .exp-header { flex-direction: column; gap: 4px; }
       .exp-badge { align-self: flex-start; }
 
       .certs-grid { grid-template-columns: 1fr; }
       .cert-card { flex-direction: column; gap: 12px; }
+      .cert-icon { flex-shrink: 0; }
 
       .about-cards { grid-template-columns: 1fr; }
       .beyond-grid { grid-template-columns: 1fr; }
 
-      .social-row { gap: 8px; }
+      .social-row { gap: 8px; flex-wrap: wrap; }
       .icon-btn--resume { font-size: .72rem; padding: 0 10px; }
 
       .pc-header { flex-wrap: wrap; }
+      .pc-tags { flex-wrap: wrap; }
+      .tag { font-size: .72rem; }
+
+      /* prevent any child from escaping the viewport */
+      .project-card, .exp-card, .cert-card, .about-card, .beyond-card {
+        max-width: 100%;
+        overflow: hidden;
+      }
     }
   </style>
 </head>
