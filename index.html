@@ -275,6 +275,7 @@
     .ticker-scroll-inner {
       display: flex;
       white-space: nowrap;
+      will-change: transform;
       font-family: 'Fira Code', monospace;
       font-size: 11px;
       letter-spacing: 2.5px;
@@ -394,6 +395,21 @@
       color: var(--text-muted);
       transition: color var(--transition), border-color var(--transition), transform var(--transition), background var(--transition);
     }
+    .icon-btn--resume {
+      width: auto;
+      padding: 0 14px;
+      gap: 7px;
+      color: var(--accent-bright);
+      border-color: rgba(100,255,218,.55);
+      background: rgba(100,255,218,.07);
+      font-family: 'Fira Code', monospace;
+      font-size: .78rem;
+      letter-spacing: .04em;
+    }
+    .icon-btn--resume:hover {
+      background: rgba(100,255,218,.14);
+      border-color: var(--accent-bright);
+    }
     .icon-btn:hover {
       color: var(--accent-bright);
       border-color: var(--accent-bright);
@@ -499,6 +515,11 @@
       border-left: 3px solid var(--accent);
       border-radius: var(--radius);
       padding: 20px;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .about-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
     }
     .about-card h4 {
       font-size: .72rem;
@@ -1136,8 +1157,8 @@
         <!-- <div class="ticker-line"></div> -->
         <div class="ticker-scroll-outer">
           <div class="ticker-scroll-inner">
-            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;·&nbsp;&nbsp;&nbsp;</span>
+            <span>DATA &nbsp;·&nbsp; FOOTBALL &nbsp;·&nbsp; MUSIC &nbsp;·&nbsp; PRODUCT &nbsp;·&nbsp; AI &nbsp;·&nbsp;&nbsp;&nbsp;</span>
           </div>
         </div>
       </div>
@@ -1175,6 +1196,10 @@
 
       <div class="hero-cta">
         <div class="social-row">
+          <a href="./samad_zaheer_resume-1.pdf" download class="icon-btn icon-btn--resume" aria-label="Download Resume">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Resume
+          </a>
           <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
           </a>
@@ -1260,7 +1285,7 @@
         <div class="exp-card">
           <div class="exp-header">
             <div>
-              <div class="exp-company">Zenatix by Schneider Electric</div>
+              <div class="exp-company">Schneider Electric (Zenatix)</div>
               <div class="exp-role">Business Analyst &nbsp;·&nbsp; India</div>
             </div>
             <span class="exp-badge">Nov 2022 – Jan 2024</span>
@@ -1743,7 +1768,7 @@
     <div class="contact-links">
       <a href="mailto:samadzaheer258@gmail.com" class="contact-link">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        samadzaheer258@gmail.com
+        Email Me
       </a>
       <a href="https://github.com/SamadZaheer" target="_blank" rel="noopener noreferrer" class="contact-link">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
